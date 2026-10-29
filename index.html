@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciarán Higgins — Risk/Finance Analyst</title>
+    <meta name="description" content="Risk and finance professional with technical expertise in Python and data analytics, looking to progress into programming and data analytical roles.">
+    <meta property="og:title" content="Ciarán Higgins — Risk/Finance Analyst">
+    <meta property="og:description" content="Risk and finance professional with technical expertise in Python and data analytics, looking to progress into programming and data analytical roles.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <!-- Add og:image later: 1200x630 PNG matching dark theme -->
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Theme initialization script to prevent flash -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light');
+            }
+        })();
+    </script>
+
+    <style>
+        :root {
+            --bg: #020a18;
+            --bg-grad: linear-gradient(170deg, #020a18 0%, #041028 40%, #06142e 70%, #020a18 100%);
+            --surface: rgba(8,24,56,0.85);
+            --border: rgba(0,170,255,0.12);
+            --border-glow: rgba(0,170,255,0.3);
+            --text: #d0e0f0;
+            --text-bright: #e8f0ff;
+            --text-dim: #6888aa;
+            --neon: #00aaff;
+            --cyan: #00e5ff;
+            --green: #00ff88;
+            --amber: #ffaa00;
+            --red: #ff4466;
+            --purple: #aa66ff;
+            --grid-color: rgba(0, 170, 255, 0.03);
+            --orb-1: rgba(0, 170, 255, 0.07);
+            --orb-2: rgba(0, 229, 255, 0.05);
+            --header-bg: rgba(2, 10, 24, 0.75);
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+        }
+
+        html.light {
+            --bg: #f4f7fb;
+            --bg-grad: linear-gradient(170deg, #f4f7fb 0%, #ebf1f8 40%, #e2eaf5 70%, #f4f7fb 100%);
+            --surface: rgba(255, 255, 255, 0.85);
+            --border: rgba(0, 110, 200, 0.15);
+            --border-glow: rgba(0, 110, 200, 0.3);
+            --text: #2c3e50;
+            --text-bright: #1a252f;
+            --text-dim: #7f8c8d;
+            --neon: #0066cc;
+            --cyan: #0088bb;
+            --green: #008844;
+            --amber: #cc7a00;
+            --red: #cc2244;
+            --purple: #6622cc;
+            --grid-color: rgba(0, 100, 200, 0.04);
+            --orb-1: rgba(0, 100, 200, 0.06);
+            --orb-2: rgba(0, 150, 220, 0.04);
+            --header-bg: rgba(244, 247, 251, 0.85);
+            --card-shadow: 0 8px 24px rgba(0, 50, 100, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Architecture */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-grad);
+            z-index: -3;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .orb-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.8;
+            animation: orbit 25s infinite linear;
+        }
+
+        .orb-1 {
+            width: 450px;
+            height: 450px;
+            background: var(--orb-1);
+            top: -100px;
+            left: -100px;
+            animation-duration: 30s;
+        }
+
+        .orb-2 {
+            width: 550px;
+            height: 550px;
+            background: var(--orb-2);
+            bottom: -150px;
+            right: -150px;
+            animation-duration: 35s;
+            animation-direction: reverse;
+        }
+
+        @keyframes orbit {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(40px, 60px, 0) rotate(120deg); }
+            66% { transform: translate(-30px, 40px, 0) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sticky Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-name {
+            font-weight: 700;
+            color: var(--text-bright);
+            font-size: 1.05rem;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--card-shadow);
+        }
+
+        .icon-btn:hover {
+            border-color: var(--border-glow);
+            color: var(--cyan);
+            transform: translateY(-1px);
+        }
+
+        .icon-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 40px 0 60px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-bright);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .hero-role {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--neon);
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-statement {
+            font-size: 1.15rem;
+            color: var(--text);
+            max-width: 720px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--neon);
+            color: #020a18;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0, 170, 255, 0.3);
+        }
+
+        html.light .btn-primary {
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 6px 24px rgba(0, 170, 255, 0.4);
+        }
+
+        /* Collapsible Sections */
+        .section-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
+            transition: border-color 0.2s ease;
+        }
+
+        .section-card:hover {
+            border-color: var(--border-glow);
+        }
+
+        .section-header {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-align: left;
+            color: var(--text-bright);
+        }
+
+        .section-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--neon);
+            background: rgba(0, 170, 255, 0.05);
+            flex-shrink: 0;
+        }
+
+        .section-heading-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .section-toggle-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            font-weight: 400;
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section-content {
+            padding: 0 24px 24px 24px;
+            color: var(--text);
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .section-content.collapsed {
+            display: none;
+            padding: 0 24px;
+        }
+
+        /* Content Formatting Inside Sections */
+        p {
+            margin-bottom: 16px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--neon);
+            font-weight: bold;
+        }
+
+        strong {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        /* Links styling */
+        a {
+            color: var(--neon);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--cyan);
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+        }
+
+        /* Custom layout structures */
+        .experience-item, .education-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .experience-item:last-child, .education-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: 1.05rem;
+        }
+
+        .item-subtitle {
+            font-size: 0.95rem;
+            color: var(--neon);
+            margin-bottom: 8px;
+        }
+
+        .item-date {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            background: rgba(104, 136, 170, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .skill-category {
+            background: rgba(104, 136, 170, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .skill-category-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            font-size: 0.85rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 6px;
+            color: var(--text-bright);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .section-header {
+                padding: 16px 18px;
+            }
+            .section-content {
+                padding: 0 18px 18px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="orb-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <a href="#" class="header-name">Ciarán Higgins</a>
+            <div class="header-controls">
+                <!-- Collapse / Expand All Toggle -->
+                <button class="icon-btn" id="toggle-all-btn" title="Collapse/Expand All Sections" aria-label="Collapse/Expand All Sections">
+                    <svg id="toggle-all-icon" viewBox="0 0 24 24">
+                        <path d="M19 13H5v-2h14v2z"/>
+                    </svg>
+                </button>
+                <!-- Theme Toggle -->
+                <button class="icon-btn" id="theme-toggle-btn" title="Toggle Light/Dark Theme" aria-label="Toggle Light/Dark Theme">
+                    <svg id="theme-icon" viewBox="0 0 24 24">
+                        <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">Ciarán Higgins</h1>
+            <div class="hero-role">Risk/Finance Analyst</div>
+            <p class="hero-statement">Bridging risk management and data analytics to drive smarter financial solutions.</p>
+            <a href="mailto:ciaranhigginsl@gmail.com" class="btn-primary">
+                Get in touch
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </section>
+
+        <!-- Section 1: Professional Experience -->
+        <div class="section-card">
+            <button class="section-header" aria-expanded="true" data-target="section-1">
+                <div class="section-title-wrapper">
+                    <div class="section-number">1</div>
+                    <div class="section-heading-text">Professional Experience</div>
+                </div>
+                <div class="section-toggle-icon" id="icon-section-1">-</div>
+            </button>
+            <div class="section-content" id="section-1">
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Risk Analyst / Senior Technical Support</div>
+                            <div class="item-subtitle">Global Payments</div>
+                        </div>
+                        <div class="item-date">Jul 2024 – PRESENT | Aug 2020 – Jul 2024</div>
+                    </div>
+                    <ul>
+                        <li>Conducted quantitative and qualitative risk assessments to identify potential financial, operational, and strategic risks[cite: 1].</li>
+                        <li>Ensured adherence to regulatory requirements and internal risk management frameworks, producing detailed risk reports for stakeholders[cite: 1].</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Business Tech Consultant</div>
+                            <div class="item-subtitle">Bank of Ireland</div>
+                        </div>
+                        <div class="item-date">Jul 2018 – Jan 2019</div>
+                    </div>
+                    <ul>
+                        <li>Managed wide variety of banking customers and investigated banking fraud as a Business Tech Consultant at Bank of Ireland[cite: 1].</li>
+                        <li>Efficiently resolving queries for VIP bank customers[cite: 1].</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Home Moves Consultant</div>
+                            <div class="item-subtitle">SSE Airtricity & SSE Group</div>
+                        </div>
+                        <div class="item-date">May 2017 – Jul 2018</div>
+                    </div>
+                    <ul>
+                        <li>Managing home moves and providing utility requirements[cite: 1].</li>
+                        <li>Built relationships with clients to maintain sales goals and create new opportunities[cite: 1].</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Skills & Technical Stack -->
+        <div class="section-card">
+            <button class="section-header" aria-expanded="true" data-target="section-2">
+                <div class="section-title-wrapper">
+                    <div class="section-number">2</div>
+                    <div class="section-heading-text">Skills & Technical Stack</div>
+                </div>
+                <div class="section-toggle-icon" id="icon-section-2">-</div>
+            </button>
+            <div class="section-content" id="section-2">
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-category-title">Programming & Data</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Data Analytics</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Risk & Finance</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Financial Analysis</span>
+                            <span class="skill-tag">Risk Assessment</span>
+                            <span class="skill-tag">Regulatory Compliance</span>
+                            <span class="skill-tag">Auditing</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Operations</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Global Payments</span>
+                            <span class="skill-tag">Administration</span>
+                            <span class="skill-tag">Fraud Investigation</span>
+                            <span class="skill-tag">Stakeholder Reporting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Education & Continuous Learning -->
+        <div class="section-card">
+            <button class="section-header" aria-expanded="true" data-target="section-3">
+                <div class="section-title-wrapper">
+                    <div class="section-number">3</div>
+                    <div class="section-heading-text">Education & Continuous Learning</div>
+                </div>
+                <div class="section-toggle-icon" id="icon-section-3">-</div>
+            </button>
+            <div class="section-content" id="section-3">
+                <div class="education-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">BA Commercial Modern Music (lvl 8) — 2.1</div>
+                            <div class="item-subtitle">Brighton Institute of Modern Music</div>
+                        </div>
+                        <div class="item-date">2012 – 2017</div>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Special Needs Assistant — 1.1</div>
+                            <div class="item-subtitle">Progressive College of Further Education</div>
+                        </div>
+                        <div class="item-date">2018 – 2019</div>
+                    </div>
+                </div>
+                <div class="education-item" style="border-bottom:none; padding-bottom:0; margin-bottom:0;">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Ongoing Technical Upskilling</div>
+                            <div class="item-subtitle">Python, SQL, & Data Analytics Short-Online Courses</div>
+                        </div>
+                        <div class="item-date">Present</div>
+                    </div>
+                    <p style="margin-top: 8px; color: var(--text-dim); font-size: 0.95rem;">Continuously completing short online courses to maintain sharp technical skills, expanding analytical capabilities to progress into programming and data analytical roles[cite: 1].</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Contact & Connect -->
+        <div class="section-card">
+            <button class="section-header" aria-expanded="true" data-target="section-4">
+                <div class="section-title-wrapper">
+                    <div class="section-number">4</div>
+                    <div class="section-heading-text">Contact & Connect</div>
+                </div>
+                <div class="section-toggle-icon" id="icon-section-4">-</div>
+            </button>
+            <div class="section-content" id="section-4">
+                <p>I am actively looking to progress my professional career and skills within a programming or data analytical role[cite: 1]. Feel free to reach out via email or connect on LinkedIn.</p>
+                <ul style="margin-top: 16px;">
+                    <li><strong>Email:</strong> <a href="mailto:ciaranhigginsl@gmail.com">ciaranhigginsl@gmail.com</a>[cite: 1]</li>
+                    <li><strong>Phone:</strong> <a href="tel:+353830089836">(+353) 083 0089836</a>[cite: 1]</li>
+                    <li><strong>Location:</strong> Tallaght, Dublin, IE[cite: 1]</li>
+                    <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/ciarán-higgins-976752168" target="_blank" rel="noopener noreferrer">linkedin.com/in/ciarán-higgins-976752168</a>
